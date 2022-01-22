@@ -134,22 +134,22 @@ body{
 #header .inner .logo div{
   vertical-align: middle;
 }
-
+/*
 #header .inner .logo div:nth-child(2){
   transform: translateY(2px);
 }
-
+*/
 #header .inner .logo .sprite_insta_icon{
-  position: relative;
+  position: relative; /*after에게 위치 기준을 전달해주기 위함*/
   margin-right: 30px;
 }
 
 #header .inner .logo .sprite_insta_icon:after{
-  content: '';
+  content: ''; /*공백을 받아옴*/
   width: 1px;
   height: 28px;
   background: #000;
-  position: absolute;
+  position: absolute; /*부모를 기준으로 위치를 잡*/
   right: -15px;
   top: -4px;
 }
@@ -272,44 +272,6 @@ body{
   font-size: 14px;
   color: #262626;
 }
-/*
-.side_box{
-  width: 293px;
-  position: absolute; /* 부모가 갖는 기준점을 잡지 않으면 꼭대기 까지 올라감
-  right: 0;
-  top: 0;
-}
-
-.side_box .profile_thumb{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 10px;
-}
-
-.side_box .profile_thumb img{
-  width: 100%;
-  height: 100%;
-}
-
-.side_box .user_profile{
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  color: #262626;
-}
-
-.side_box .detail .id{
-  margin-bottom: 5px;
-}
-
-.side_box .detail .en_name{
-  font-size: 12px;
-  color: #999;
-}
-*/
-
 
 .contents{
   width: 614px;
@@ -373,16 +335,7 @@ body{
 
 .contents .bottom_icons .left_icons > div{
   margin-right: 10px;
-  cursor: pointer; /* 클릭 가능 */
-}
-
-.contents .bottom_icons .right_icon > div{
-  cursor: pointer; /* 클릭 가능 */
-}
-
-.contents .likes{
-  padding: 5px 20px;
-  color: #262626;
+  /*cursor: pointer; /* 클릭 가능 */
 }
 
 .contents .likes{
@@ -442,6 +395,10 @@ body{
   cursor: pointer;
   pointer-events: none; /* 처음에는 클릭이 되지 않는다 */
   opacity: 0.6;
+}
+
+.contents .bottom_icons .right_icon > div{
+  cursor: pointer; /* 클릭 가능 */
 }
 
 .side_box{
@@ -512,7 +469,7 @@ body{
 }
 
 .thumb_user .profile_thumb{
-  width: 32px;
+  width: 34px;
   height: 34px;
 }
 
@@ -523,11 +480,14 @@ body{
 }
 
 .side_box .scroll_inner{
-  height: 100px;
+  height: 182px;
   overflow-x: hidden;
   overflow-y: auto;
+  /* overflow: hidden auto; 로 x축 y축 한번에 설정 가능*/
 }
 
+
+/*
 @media screen and (max-width:1000px) {
   #header .inner{
     width: 975px;
@@ -545,3 +505,4 @@ body{
     background: white;
   }
 }
+*/
