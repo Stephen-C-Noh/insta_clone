@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Javascript_test</title>
+    <style>
+      .box{
+        width:200px;
+        height:200px;
+        background: red;
+      }
+      .box .on{ /*it is Class Box and it is on*/
+        brackground: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <script>
+      // var userName = "Nongjang";
+
+      const userName = "Nongjang"; // strings are wrapped with "" or ''
+      const age = 28; // number
+      const married = false; // boolean
+      let girlfriend; // undifined
+      const money = null; // null = empty object
+
+      // console.log(userName);
+      console.log(typeof userName);
+      console.log(typeof age);
+      console.log(typeof married);
+      console.log(typeof girlfriend);
+      console.log(typeof money);
+
+      console.log(2-3);
+      console.log(2*3);
+
+      console.log(userName === 'Nongchang');
+      console.log(userName === 'Nongjang');
+      console.log(age > 30);
+      console.log(age < 30);
+
+      if(userName ==='Nongjang'){
+        console.log("Correct!");
+      }
+
+      // document.getElementsByClassName('box');
+      const box = document.querySelector('.box')
+      //const box = documment.querySelectorAll('.box')
+      box.addEventListener('click',function(){
+        //console.log("Clicked");
+        box.style.background = "blue"; // change color > blue
+        // box.classList.add('on');
+        // box.classList.remove('on');
+        box.classList.toggle('on'); // if it has .on class, remove it. if it doesn't, add one.
+      });
+
+      
+
+    </script>
+  </body>
+</html>
