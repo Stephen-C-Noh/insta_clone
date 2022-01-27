@@ -29,7 +29,17 @@ function deligationFunc(e){
   }
 
   if(elem.matches('[data-name="heartbeat"]')){
-    console.log("heart!!!!");
+    // console.log("heart!!!!");
+    $.ajax({
+      Method: 'GET', // if error occurs, change it into GET
+      url: 'data/like.json',
+      data: 37,
+      dataType: 'json', // Type declartion.
+      success: function(response){
+        let likeCount =document.querySelector('#like-count-37');
+        likeCount.innerHTML = response.like_count +'Likes';
+      }
+    })
   }else if (elem.matches('[data-name="bookmark"]')) {
     console.log("bookmark!!");
   }else if (elem.matches('[data-name="share"]')) {
