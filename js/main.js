@@ -4,11 +4,42 @@ const sidebox = document.querySelector( '.side_box');
 
 // use querySelectorAll to bring in all elements
 const variableWidth = document.querySelectorAll(".contents_box .contents");
+const deligation = document.querySelector(".contents_box");
 
+/*
 heart.addEventListener('click', function(){
   console.log('hit');
   heart.classList.toggle('on'); // when you click on heart, add .on class
 });
+*/
+
+function deligationFunc(e){
+  let elem = e.target; // clicked element.
+  console.log(e.target);
+  console.log(elem);
+
+  // when misclicked:
+  while(!elem.getAttribute('data-name')){
+    // look for parent of elem
+    elem = elem.parentNode;
+    if(elem.nodeName === 'BODY'){ // if there's no event till body
+      elem = null;
+      return;
+    } // keep accessing parent till finding data-name property.
+  }
+
+  if(elem.matches('[data-name="heartbeat"]')){
+    console.log("heart!!!!");
+  }else if (elem.matches('[data-name="bookmark"]')) {
+    console.log("bookmark!!");
+  }else if (elem.matches('[data-name="share"]')) {
+    console.log("share!!!!!!");
+  }else if (elem.matches('[data-name="more"]')) {
+    console.log("more!");
+  }
+
+  elem.classList.toggle('on'); // add 'on' class to elem
+}
 
 function resizeFunc(){
   if(pageYOffset >= 10){
@@ -23,7 +54,8 @@ function resizeFunc(){
     }
   }else{
     for(let i=0; i<variableWidth.length; i++){
-      variableWidth[i].removeAttribute('style');
+      if(window.innerWidth > 600)
+        variableWidth[i].removeAttribute('style');
     }
   }
 }
@@ -32,13 +64,24 @@ function scrollFunc(){
   console.log(pageYOffset);
   if(pageYOffset >= 10){ // if drags
     header.classList.add('on');
-    sidebox.classList.add('on');
-    resizeFunc();
+    if(sidebox){
+      sidebox.classList.add('on');
+    }resizeFunc();
   }else{
     header.classList.remove( 'on');
-    sidebox.classList.remove( 'on');
-    sidebox.removeAttribute( 'style');
+    if(sidebox){
+      sidebox.classList.remove( 'on');
+      sidebox.removeAttribute( 'style');
+    }
   }
+}
+
+setTimeout(function (){
+  scrollTo(0,0);
+}, 100);
+
+if(deligation){
+  deligation.addEventListener('click', deligationFunc);
 }
 
 window.addEventListener( 'resize', resizeFunc);

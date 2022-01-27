@@ -70,7 +70,6 @@
 }
 
 .sprite_bookmark_outline.on {
-  display: inline-block;
 	background: url('../imgs/background01.png') no-repeat -159px -286px;
 	width: 19px;
 	height: 24px;
@@ -316,7 +315,9 @@ body{
   margin-right: 10px;
   /*cursor: pointer; /* 클릭 가능 */
 }
-.heart_btn.on .sprite_heart_icon_outline{ /* if on class is added, change the image */
+
+/*.heart_btn.on .sprite_heart_icon_outline{ /* if on class is added, change the image >>> */
+.sprite_heart_icon_outline.on{
   background: url('../imgs/background01.png') no-repeat -26px -261px;
 }
 
