@@ -31,13 +31,17 @@ function deligationFunc(e){
   if(elem.matches('[data-name="heartbeat"]')){
     // console.log("heart!!!!");
     $.ajax({
-      Method: 'GET', // if error occurs, change it into GET
-      url: 'data/like.json',
+      Method:'POST', // if error occurs, change it into GET
+      url:'data/like.json',
       data: 37,
-      dataType: 'json', // Type declartion.
+      dataType:'json', // Type declartion.
       success: function(response){
         let likeCount =document.querySelector('#like-count-37');
         likeCount.innerHTML = response.like_count +'Likes';
+      },
+      error: function(request,status,error){
+        alert('log-in required.');
+        window.location.replace('https://www.google.ca'); // temporary error page
       }
     })
   }else if (elem.matches('[data-name="bookmark"]')) {
