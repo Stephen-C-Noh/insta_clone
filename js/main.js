@@ -1,4 +1,4 @@
-const heart = document.querySelector( '.heart_btn'); // 하트 요소 부분을 선택해서 가져옴
+/* const heart = document.querySelector( '.heart_btn'); // 하트 요소 부분을 선택해서 가져옴 */
 const header = document.querySelector( '#header');
 const sidebox = document.querySelector( '.side_box');
 
@@ -15,14 +15,14 @@ heart.addEventListener('click', function(){
 
 function deligationFunc(e){
   let elem = e.target; // clicked element.
-  console.log(e.target);
-  console.log(elem);
+  // console.log(e.target);
+  // console.log(elem);
 
   // when misclicked:
   while(!elem.getAttribute('data-name')){
     // look for parent of elem
     elem = elem.parentNode;
-    if(elem.nodeName === 'BODY'){ // if there's no event till body
+    if(elem.nodeName ==='BODY'){ // if there's no event till body
       elem = null;
       return;
     } // keep accessing parent till finding data-name property.
@@ -30,10 +30,11 @@ function deligationFunc(e){
 
   if(elem.matches('[data-name="heartbeat"]')){
     // console.log("heart!!!!");
+    let pk=elem.getAttribute('name'); // get pk value.
     $.ajax({
       Method:'POST', // if error occurs, change it into GET
       url:'data/like.json',
-      data: 37,
+      data: {pk},
       dataType:'json', // Type declartion.
       success: function(response){
         let likeCount =document.querySelector('#like-count-37');
@@ -45,10 +46,68 @@ function deligationFunc(e){
       }
     })
   }else if (elem.matches('[data-name="bookmark"]')) {
-    console.log("bookmark!!");
+    // console.log("bookmark!!");
+    let pk = elem.getAttribute('name'); // get pk value
+    $.ajax({
+      Method: 'POST',
+      url: 'data/bookmark.json',
+      data: {pk},
+      dataType: 'json',
+      success: function (response) {
+        let bookmarkCount = document.querySelector('#bookmark-count-37');
+        bookmarkCount.innerHTML = response.bookmark_count + 'Bookmarks';
+      },
+      error: function (request, status, error) {
+        alert('log-in required.');
+        window.location.replace('https://google.com');
+      }
+    })
+  }else if(elem.matches('[data-name="comment"]')){
+    let content = document.querySelector('#add-comment-post37 > input[type=text]').value;
+    console.log(content);
+
+    if(content.length > 140){
+      alert('Comment cannot be longer than 140 characters. Number of characters: ' + content.length);
+      return ;
+    }
+    $.ajax({
+      Method:'POST',
+      url:'./comment.html',
+      data: {
+        'pk': 37,
+        'content': content
+      },
+      dataType:'html',
+      success: function (data){
+        document.querySelector('#comment-list-ajax-post37').insertAdjacentHTML('afterbegin',data);
+      },
+      error:function (request,status,error){
+        alert('ERROR Occurred.');
+      }
+    })
+    document.querySelector('#add-comment-post37>input[type=text]').value='';
+  }else if (elem.matches('[data-name="comment_delete"]')) {
+    $.ajax({
+      Method:'POST',
+      url:'data/delete.json',
+      data:{
+        'pk':37,
+      },
+      dataType:'json',
+      success:function (response){
+        if(response.status){
+          let comt = document.querySelector('.comment-detail');
+          comt.remove();
+        }
+      },
+      error:function (request, status, error){
+        alert('Error Occurred...');
+        window.location.replace('https://google.ca');
+      }
+    })
   }else if (elem.matches('[data-name="share"]')) {
     console.log("share!!!!!!");
-  }else if (elem.matches('[data-name="more"]')) {
+  }if (elem.matches('[data-name="more"]')) {
     console.log("more!");
   }
 
@@ -75,7 +134,7 @@ function resizeFunc(){
 }
 
 function scrollFunc(){
-  console.log(pageYOffset);
+  // console.log(pageYOffset);
   if(pageYOffset >= 10){ // if drags
     header.classList.add('on');
     if(sidebox){

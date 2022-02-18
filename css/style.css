@@ -58,8 +58,8 @@
 .sprite_share_icon {
   display: inline-block;
   background: url('../imgs/background01.png') no-repeat -156px -235px;
-	width: 24px;
-	height: 21px;
+	width: 21px;
+	height: 24px;
 }
 
 .sprite_bookmark_outline {
@@ -191,7 +191,6 @@ body{
 
 #header .search_box .fake_field{
   position: absolute; /* 검색 창 위에 글자를 보이게 하기 위함 */
-
   /* 가운데 배치하는 공식 */
   left: 50%;
   top: 50%;
@@ -335,7 +334,12 @@ body{
 
 .contents .comment_container .comment{
   display: flex;
+  flex-direction: column;
   font-size: 14px;
+}
+
+.contents .comment_container .comment-detail{
+  display: flex;
 }
 
 .contents .comment_container .comment .nick_name{
@@ -376,7 +380,7 @@ body{
   top: 50%;
   transform: translateY(-50%); /* y축으로 중앙정렬 */
   cursor: pointer;
-  pointer-events: none; /* 처음에는 클릭이 되지 않는다 */
+  /* pointer-events: none; /* 처음에는 클릭이 되지 않는다 */
   opacity: 0.6;
 }
 
@@ -451,11 +455,10 @@ body{
 }
 
 .thumb_user{
-  display: inline-flex; /* 원본: flex 사진 비율 고정을 위해 자체수정함 */
+  /* display: inline-flex; /* 원본: flex 사진 비율 고정을 위해 자체수정함 */
+  display: flex;
   align-items: center;
-  margin-left: 10px;
-  padding-left: 10px;
-  padding-right: 20px;
+  padding: 10px 20px;
 
 }
 
@@ -493,7 +496,8 @@ body{
 .hidden_menu .scroll_inner{
   height: 100px;
   width: auto;
-  overflow: auto hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   align-items: center;
   padding: 0 10px;
