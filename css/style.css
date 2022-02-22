@@ -291,12 +291,36 @@ body{
   font-size: 12px;
 }
 
+.contents .sprite_more_icon.on .toggle_box{
+  display: block;
+}
+
+.contents .toggle_box{
+  text-align: center;
+  position: absolute;
+  height: 0;
+  top: 20px;
+  border: 1px solid rgba(0,0,0,0.09);
+  border-radius: 3px;
+  display: none;
+}
+
+.contents .toggle_box > li{
+  padding: 5px 10px;
+  background: #fff;
+}
+
 .contents .img_section{
   overflow: hidden; /* 자식이 부모의 크기를 넘지 않도록   */
 }
 
 .contents .img_section img{
   width: 100%; /* 부모의 크기 100%를 받는다 */
+}
+
+.contents .toggle_box > li input{
+  border: none;
+  font-size: inherit;
 }
 
 .contents .bottom_icons{

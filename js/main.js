@@ -29,7 +29,6 @@ function deligationFunc(e){
   }
 
   if(elem.matches('[data-name="heartbeat"]')){
-    // console.log("heart!!!!");
     let pk=elem.getAttribute('name'); // get pk value.
     $.ajax({
       Method:'POST', // if error occurs, change it into GET
@@ -38,10 +37,10 @@ function deligationFunc(e){
       dataType:'json', // Type declartion.
       success: function(response){
         let likeCount =document.querySelector('#like-count-37');
-        likeCount.innerHTML = response.like_count +'Likes';
+        likeCount.innerHTML = response.like_count +' Likes';
       },
       error: function(request,status,error){
-        alert('log-in required.');
+        alert('log-in required. -Heartbeat');
         window.location.replace('https://www.google.ca'); // temporary error page
       }
     })
@@ -55,7 +54,7 @@ function deligationFunc(e){
       dataType: 'json',
       success: function (response) {
         let bookmarkCount = document.querySelector('#bookmark-count-37');
-        bookmarkCount.innerHTML = response.bookmark_count + 'Bookmarks';
+        bookmarkCount.innerHTML = response.bookmark_count + ' Bookmarks';
       },
       error: function (request, status, error) {
         alert('log-in required.');
@@ -105,6 +104,27 @@ function deligationFunc(e){
         window.location.replace('https://google.ca');
       }
     })
+  }else if (elem.matches('[data-name="follow"]')) {
+    $.ajax({
+      Method:'POST',
+      url:'data/follow.json',
+      data:{
+        'pk': 37,
+      },
+      dataType:'json',
+      success: function (response){
+        if(response.status){
+          document.querySelector('input.follow').value="Following";
+        }else{
+          document.querySelector('input.follow').value="Follower"
+        }
+      },
+      error: function(request, status,error){
+        alert("Error... Follow...");
+        window.location.replace('https://google.ca');
+      }
+    })
+
   }else if (elem.matches('[data-name="share"]')) {
     console.log("share!!!!!!");
   }if (elem.matches('[data-name="more"]')) {
@@ -134,7 +154,12 @@ function resizeFunc(){
 }
 
 function scrollFunc(){
-  // console.log(pageYOffset);
+  let scrollHeight = pageYOffset+window.innerHeight;
+  let documentHeight = document.body.scrollHeight;
+
+  console.log('scrollHeight : '+scrollHeight)
+  console.log('documentHeight : '+documentHeight)
+
   if(pageYOffset >= 10){ // if drags
     header.classList.add('on');
     if(sidebox){
@@ -147,6 +172,39 @@ function scrollFunc(){
       sidebox.removeAttribute( 'style');
     }
   }
+  if(scrollHeight >= documentHeight){
+    let page = document.querySelector('#page').value;
+    document.querySelector('#page').value= parseInt(page) + 1;
+
+    callMorePostAjax(page);
+    if(page > 5){
+      return;
+    }
+  }
+}
+
+function callMorePostAjax(page){
+  if(page > 5){
+    return;
+  }
+
+  $.ajax({
+    Method:'POST',
+    url:'./post.html',
+    data:{
+      'page':page,
+    },
+    dataType:'html',
+    success: addMorePostAjax,
+    error: function(request, status, error){
+      alert('Error - Call more most ajax');
+      window.location.replace('https://google.ca');
+    }
+  })
+}
+
+function addMorePostAjax(data){
+  deligation.insertAdjacentHTML('beforeend',data);
 }
 
 setTimeout(function (){
